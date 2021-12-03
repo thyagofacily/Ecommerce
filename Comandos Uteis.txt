@@ -1,0 +1,18 @@
+# instalar o alembic
+pip install alembic
+
+# iniciar o alembic
+alembic init alembic
+
+# criar a migracao 
+alembic revision --autogenerate -m <descricao da minha migration>
+
+# rodar a migracao
+alembic upgrade head
+
+# desfazer a migracao
+alembic downgrade <id da versao>
+
+#Comandos Uteis 
+sudo kill -9 $(sudo lsof -t -i:8000)
+uvicorn main:app --reload
