@@ -5,6 +5,7 @@ from .supplier.views import router as supplier_router
 from .payment_method.views import router as payment_method_router
 from .product_discount.views import router as discount_router
 from .coupons.views import router as coupons_router
+from .customer.views import router as customer_router
 
 router = APIRouter()
 
@@ -16,4 +17,5 @@ router.include_router(
 router.include_router(payment_method_router,
                       prefix='/payment-methods', tags=['payment-method'])
 
-router.include_router(coupons_router, prefix='/coupons', tags=['Coupons'])
+router.include_router(coupons_router, prefix='/coupons', tags=['coupons'])
+router.include_router(customer_router, prefix='/customer', tags=["customer"])
