@@ -9,6 +9,13 @@ class CustomerSchema(BaseModel):
     document_id = str
     birth_date = date
 
+class CustomerUpdateSchema(BaseModel):
+    frist_name = str
+    last_name = str
+    phone_number = str
+    genre = str
+    birth_date = date
+
 class ShowCustomerSchema(CustomerSchema):
     id = int 
 

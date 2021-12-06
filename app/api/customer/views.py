@@ -4,7 +4,7 @@ from fastapi import Depends
 
 from app.models.models import Customer
 from app.repositories.customer_repository import CustomerRepository
-from .schemas import CustomerSchema, ShowCustomerSchema
+from .schemas import CustomerSchema, ShowCustomerSchema ,CustomerUpdateSchema
 
 router = APIRouter()
 
@@ -20,7 +20,7 @@ def index(repository: CustomerRepository = Depends()):
 
 
 @router.put('/{id}')
-def update(id: int, customer: CustomerSchema, repository: CustomerRepository = Depends()):
+def update(id: int, customer: CustomerUpdateSchema, repository: CustomerRepository = Depends()):
     repository.update(id, customer.dict())
 
 
