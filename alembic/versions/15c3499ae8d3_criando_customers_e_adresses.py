@@ -1,8 +1,8 @@
-"""Tabela Customers e Adresses e o relacionamento entre elas.
+"""Criando Customers e adresses
 
-Revision ID: 24d25f30139d
+Revision ID: 15c3499ae8d3
 Revises: cbe10be22cc8
-Create Date: 2021-12-03 15:32:48.189753
+Create Date: 2021-12-06 11:06:10.275103
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '24d25f30139d'
+revision = '15c3499ae8d3'
 down_revision = 'cbe10be22cc8'
 branch_labels = None
 depends_on = None
@@ -25,7 +25,7 @@ def upgrade():
     sa.Column('phone_number', sa.String(length=15), nullable=True),
     sa.Column('genre', sa.String(length=25), nullable=True),
     sa.Column('document_id', sa.String(length=45), nullable=True),
-    sa.Column('brith_date', sa.DateTime(), nullable=True),
+    sa.Column('birth_date', sa.DATE(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('document_id')
     )

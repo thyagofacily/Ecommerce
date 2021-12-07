@@ -13,16 +13,13 @@ router = APIRouter()
 def create(customer: CustomerSchema, repository: CustomerRepository = Depends()):
     repository.create(Customer(**customer.dict()))
 
-
 @router.get('/', response_model=List[ShowCustomerSchema])
 def index(repository: CustomerRepository = Depends()):
     return repository.get_all()
 
-
 @router.put('/{id}')
 def update(id: int, customer: CustomerUpdateSchema, repository: CustomerRepository = Depends()):
     repository.update(id, customer.dict())
-
 
 @router.get('/{id}', response_model=ShowCustomerSchema)
 def show(id: int, repository: CustomerRepository = Depends()):

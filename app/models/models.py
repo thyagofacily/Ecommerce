@@ -1,7 +1,7 @@
 from sqlalchemy import Column
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import ForeignKey, UniqueConstraint
-from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, Integer, String
+from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, Integer, String , DATE
 from app.db.db import Base
 
 
@@ -58,7 +58,7 @@ class Customer(Base):
     phone_number = Column(String(15))
     genre = Column(String(25))
     document_id = Column(String(45), unique=True)
-    brith_date = Column(DateTime)
+    birth_date = Column(DATE)
 
 class Adresses(Base):
     __tablename__ = "adresses"
