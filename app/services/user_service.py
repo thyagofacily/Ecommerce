@@ -16,4 +16,14 @@ class UserService:
             user.password = bcrypt.hashpw(
             user.password.encode('utf8'), bcrypt.gensalt())
             self.user_repository.create(User(**user.dict()))
+
+    def update(self, id: int , user: UserSchema):
+
+        if user.email != self.user_repository.get_by_id(id).email :
+            if self.user_repository.find_by_email(user.email):
+                raise HTTPException(status_code= status.HTTP_409_CONFLICT, detail= "This email is alredy in use.")
+            else:
+                self.user_repository.update(id, user.dict())
+
+
         
