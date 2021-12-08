@@ -20,7 +20,7 @@ def create_token(data: dict, expire_delta=None):
     if expire_delta:
         expire = datetime.utcnow() + expire_delta
     else:
-        expire = datetime.utcnow() + timedelta(seconds=2)
+        expire = datetime.utcnow() + timedelta(seconds=300)
 
     payload.update({'exp': expire})
 
@@ -53,3 +53,7 @@ def only_admin(user=Depends(get_user)):
     if not user.role == 'admin':
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail='Allowed only for admin')
+
+def only_customer(user=Depends(get_user)):
+    if not user.role == 'customer':
+        raise HTTPException(status_code= status.HTTP_403_FORBIDDEN,detail='Allowed only for customers')
