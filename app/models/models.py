@@ -83,3 +83,23 @@ class Adresses(Base):
     customer_id = Column(Integer, ForeignKey('customers.id'))
     customer = relationship(Customer)
 
+class Order(Base):
+    __tablename__ = "orders"
+    
+    id = Column(Integer, primary_key=True)
+    number = Column(String(10))
+    status = Column(String(15))
+    customer_id = Column(Integer, ForeignKey('customers.id'))
+    created_at = Column(DateTime)
+    address_id = Column(Integer, ForeignKey('adresses.id'))
+    total_value= Column(Float)
+    payment_form_id = Column(Integer, ForeignKey('payment_methods.id'))
+    total_discount = Column(Float)
+
+class OrderProducts(Base):
+    __tablename__ = "order_products"
+
+    id = Column(Integer, primary_key=True)
+    order_id = Column(Integer, ForeignKey('orders.id'))
+    product_id = Column(Integer, ForeignKey('products.id'))
+    quantity = Column(Integer)
