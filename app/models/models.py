@@ -48,6 +48,14 @@ class Coupons(Base):
     limit = Column(Integer)
     type = Column(String(15))
     value = Column(Float(10,2))
+    
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    display_name = Column(String(100))
+    email = Column(String(50))
+    role = Column(String(10))
+    password = Column(String(100))
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -59,6 +67,7 @@ class Customer(Base):
     genre = Column(String(25))
     document_id = Column(String(45), unique=True)
     birth_date = Column(DATE)
+    user_id = Column(Integer, ForeignKey('users.id'))
 
 class Adresses(Base):
     __tablename__ = "adresses"
@@ -74,10 +83,3 @@ class Adresses(Base):
     customer_id = Column(Integer, ForeignKey('customers.id'))
     customer = relationship(Customer)
 
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
-    display_name = Column(String(100))
-    email = Column(String(50))
-    role = Column(String(10))
-    password = Column(String(100))

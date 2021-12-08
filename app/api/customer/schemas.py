@@ -9,6 +9,13 @@ class CustomerSchema(BaseModel):
     document_id : str
     birth_date : date
 
+class CreateCostumerSchema(CustomerSchema):
+    email:str
+    password:str
+    
+    class Config:
+        orm_mode = True
+
 class CustomerUpdateSchema(BaseModel):
     frist_name : str
     last_name : str

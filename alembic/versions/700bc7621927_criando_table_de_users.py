@@ -24,6 +24,7 @@ def upgrade():
     sa.Column('email', sa.String(length=50), nullable=True),
     sa.Column('role', sa.String(length=10), nullable=True),
     sa.Column('password', sa.String(length=100), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

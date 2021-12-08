@@ -26,6 +26,8 @@ def upgrade():
     sa.Column('genre', sa.String(length=25), nullable=True),
     sa.Column('document_id', sa.String(length=45), nullable=True),
     sa.Column('birth_date', sa.DATE(), nullable=True),
+    sa.Column("user_id", sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'],),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('document_id')
     )
