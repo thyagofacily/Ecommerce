@@ -10,3 +10,4 @@ class UserRepository(BaseRepository):
 
     def find_by_email(self, email):
         return self.session.query(self.model).filter_by(email=email).first()
+

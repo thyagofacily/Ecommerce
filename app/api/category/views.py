@@ -4,10 +4,9 @@ from .schemas import CategorySchema, ShowCategorySchema
 from app.db.db import get_db
 from sqlalchemy.orm import Session
 from app.models.models import Category
+from app.services.auth_service import get_user, only_admin
 
-
-router = APIRouter()
-
+router = APIRouter(dependencies=[Depends(only_admin)])
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
 def create(category: CategorySchema, db: Session = Depends(get_db)):

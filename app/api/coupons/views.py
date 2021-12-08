@@ -5,8 +5,9 @@ from fastapi import Depends
 from app.models.models import Coupons
 from app.repositories.coupons_repository import CouponsRepository
 from .schemas import CouponSchema, ShowCouponSchema, EditCouponSchema
+from app.services.auth_service import get_user, only_admin
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(only_admin)])
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
 def create(coupon: CouponSchema, repository: CouponsRepository = Depends()):
