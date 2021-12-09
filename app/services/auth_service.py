@@ -4,16 +4,12 @@ from fastapi.security.oauth2 import OAuth2PasswordBearer, OAuth2PasswordRequestF
 import jwt
 import bcrypt
 from jwt.exceptions import ExpiredSignatureError
-
 from app.repositories.user_repository import UserRepository
-
 
 oauth_scheme = OAuth2PasswordBearer(tokenUrl='/auth/login')
 
-
 JWT_SECRET = 'SKDFHSDFHIWYE34345SDFHS230472083hskjdhfk'
 ALGORITHM = 'HS256'
-
 
 def create_token(data: dict, expire_delta=None):
     payload = data.copy()
@@ -26,7 +22,6 @@ def create_token(data: dict, expire_delta=None):
 
     return jwt.encode(payload, JWT_SECRET, ALGORITHM)
 
-
 def authenticate(form_data: OAuth2PasswordRequestForm = Depends(), user_repository: UserRepository = Depends()):
     user = user_repository.find_by_email(form_data.username)
 
@@ -38,7 +33,6 @@ def authenticate(form_data: OAuth2PasswordRequestForm = Depends(), user_reposito
 
     return create_token({'id': user.id})
 
-
 def get_user(token: str = Depends(oauth_scheme), user_repository: UserRepository = Depends()):
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=ALGORITHM)
@@ -47,7 +41,6 @@ def get_user(token: str = Depends(oauth_scheme), user_repository: UserRepository
     except ExpiredSignatureError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail='This token has expired')
-
 
 def only_admin(user=Depends(get_user)):
     if not user.role == 'admin':
