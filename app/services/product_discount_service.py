@@ -1,5 +1,6 @@
 from fastapi import Depends, status
 from fastapi.exceptions import HTTPException
+from app.models.models import Product_discount
 from app.repositories.payment_method_repository import PaymentMethodRepository
 from app.repositories.product_discount_repository import ProductDiscountRepository
 from app.api.product_discount.schemas import ProductDiscountSchema
@@ -15,7 +16,7 @@ class ProductDiscountService:
 
         try:
             if self.payment_method_repository.get_by_id(discount.payment_method_id).enabled :
-                self.product_discount_repository.create(**discount.dict())
+                self.product_discount_repository.create(Product_discount(**discount.dict()))
         except:
             raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED, detail='Order creation Failed')
+                status_code=status.HTTP_403_UNAUTHORIZED, detail='Its only possible to create one discount by payment mode')

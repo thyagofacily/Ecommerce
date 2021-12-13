@@ -4,7 +4,6 @@ from sqlalchemy.sql.schema import ForeignKey, UniqueConstraint
 from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, Integer, String , DATE
 from app.db.db import Base
 
-
 class Category(Base):
     __tablename__ = 'categories'
 
