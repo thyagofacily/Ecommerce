@@ -39,6 +39,15 @@ class Product(Base):
     supplier = relationship(Supplier)
     created_at = Column(DateTime)
 
+class Product_discount(Base):
+    __tablename__= 'product_discount'
+
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey('products.id'))
+    mode = Column(String(45))
+    value = Column(Float())
+    payment_method_id = Column(Integer, ForeignKey('payment_methods.id'), unique=True)
+
 class Coupons(Base):
     __tablename__ = 'coupons'
 

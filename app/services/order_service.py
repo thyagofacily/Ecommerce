@@ -69,7 +69,7 @@ class OrderService:
         total_discount = 0.0
         if coupon_code :
             coupon = self.coupon_repository.get_by_code(coupon_code)
-            if coupon.expire_at <  datetime.now() :
+            if (coupon.expire_at <  datetime.now()) and (coupon.limit > 0):
                 total_discount = coupon.value
                 self.coupon_repository.update(coupon.id, {"limit": coupon.limit - 1})
 
