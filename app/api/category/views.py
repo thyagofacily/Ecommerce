@@ -12,7 +12,7 @@ router = APIRouter(dependencies=[Depends(only_admin)])
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
 def create(category: CategorySchema, repository: CategoryRepository = Depends()):
-    repository.create(Category(**category.dict()))
+    return repository.create(Category(**category.dict()))
     
 @router.get('/', response_model=List[ShowCategorySchema])
 def index(repository: CategoryRepository = Depends()):
